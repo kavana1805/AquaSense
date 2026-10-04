@@ -1,0 +1,378 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AquaSense | Smart Water Monitoring</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #061a35;
+            color: white;
+            min-height: 100vh;
+        }
+
+        header {
+            padding: 24px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            background: rgba(255, 255, 255, 0.04);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logo {
+            font-size: 27px;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: #40d9ff;
+        }
+
+        nav {
+            display: flex;
+            gap: 26px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: #d8e9ff;
+            text-decoration: none;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #40d9ff;
+        }
+
+        .hero {
+            padding: 85px 8% 70px;
+            display: grid;
+            grid-template-columns: 1.3fr 0.7fr;
+            align-items: center;
+            gap: 45px;
+            background:
+                radial-gradient(ellipse at 80% 45%,
+                rgba(0, 190, 255, 0.18), transparent 45%),
+                linear-gradient(130deg, #061a35, #0a3159);
+        }
+
+        .eyebrow {
+            display: inline-block;
+            padding: 9px 15px;
+            border: 1px solid rgba(64, 217, 255, 0.4);
+            border-radius: 30px;
+            color: #72e4ff;
+            background: rgba(64, 217, 255, 0.08);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 25px;
+        }
+
+        h1 {
+            font-size: clamp(42px, 5.5vw, 70px);
+            line-height: 1.08;
+            letter-spacing: -2px;
+            margin-bottom: 24px;
+        }
+
+        h1 span {
+            color: #40d9ff;
+        }
+
+        .hero p {
+            color: #b6cbe3;
+            font-size: 17px;
+            line-height: 1.9;
+            max-width: 590px;
+            margin-bottom: 32px;
+        }
+
+        .buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 15px 22px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 14px;
+            transition: 0.25s;
+        }
+
+        .primary {
+            color: #04223e;
+            background: linear-gradient(100deg, #40d9ff, #9bf0ff);
+            box-shadow: 0 8px 25px rgba(64, 217, 255, 0.2);
+        }
+
+        .secondary {
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .button:hover {
+            transform: translateY(-3px);
+        }
+
+        .water-art {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 300px;
+        }
+
+        .drop-circle {
+            width: 255px;
+            height: 255px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: radial-gradient(circle,
+                rgba(64, 217, 255, 0.22),
+                rgba(10, 90, 160, 0.08) 60%,
+                transparent 70%);
+            border: 1px solid rgba(64, 217, 255, 0.18);
+            box-shadow: 0 0 70px rgba(0, 190, 255, 0.12);
+        }
+
+        .drop {
+            font-size: 130px;
+            filter: drop-shadow(0 0 25px rgba(64, 217, 255, 0.6));
+        }
+
+        .section {
+            padding: 55px 8% 75px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 38px;
+        }
+
+        .section-title h2 {
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        .section-title p {
+            color: #9eb6d0;
+            line-height: 1.7;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 22px;
+        }
+
+        .card {
+            padding: 28px;
+            border: 1px solid rgba(146, 200, 240, 0.16);
+            border-radius: 17px;
+            background: linear-gradient(145deg,
+                rgba(255, 255, 255, 0.09),
+                rgba(255, 255, 255, 0.025));
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(64, 217, 255, 0.55);
+            background: rgba(64, 217, 255, 0.07);
+        }
+
+        .icon {
+            width: 55px;
+            height: 55px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 14px;
+            background: rgba(64, 217, 255, 0.12);
+            font-size: 27px;
+            margin-bottom: 22px;
+        }
+
+        .card h3 {
+            font-size: 20px;
+            margin-bottom: 13px;
+        }
+
+        .card p {
+            color: #a9bfd8;
+            font-size: 14px;
+            line-height: 1.8;
+            margin-bottom: 23px;
+        }
+
+        .card a {
+            color: #40d9ff;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .status {
+            text-align: center;
+            margin-top: 35px;
+            color: #a9bfd8;
+            font-size: 13px;
+        }
+
+        .status span {
+            color: #4ade80;
+        }
+
+        footer {
+            padding: 25px 8%;
+            text-align: center;
+            color: #8da9c6;
+            font-size: 13px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        @media (max-width: 800px) {
+            .hero {
+                grid-template-columns: 1fr;
+                padding-top: 60px;
+            }
+
+            .water-art {
+                min-height: 220px;
+            }
+
+            .drop-circle {
+                width: 200px;
+                height: 200px;
+            }
+
+            .drop {
+                font-size: 100px;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="logo">💧 Aqua<span>Sense</span></div>
+
+        <nav>
+            <a href="/">Home</a>
+            <a href="/dashboard">Dashboard</a>
+            <a href="/history">History</a>
+            <a href="/analytics">Analytics</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div>
+                <div class="eyebrow">SMART WATER MONITORING</div>
+
+                <h1>
+                    Every Drop.<br>
+                    Every <span>Insight.</span>
+                </h1>
+
+                <p>
+                    Monitor water consumption, understand usage patterns,
+                    and make smarter decisions with AquaSense — your
+                    intelligent water monitoring companion.
+                </p>
+
+                <div class="buttons">
+                    <a href="/dashboard" class="button primary">
+                        Explore Dashboard →
+                    </a>
+                    <a href="/analytics" class="button secondary">
+                        View Analytics
+                    </a>
+                </div>
+            </div>
+
+            <div class="water-art">
+                <div class="drop-circle">
+                    <div class="drop">💧</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-title">
+                <h2>Explore Your Water Insights</h2>
+                <p>One platform. Clear insights. Smarter water management.</p>
+            </div>
+
+            <div class="cards">
+                <div class="card">
+                    <div class="icon">📊</div>
+                    <h3>Smart Dashboard</h3>
+                    <p>
+                        Monitor consumption readings, review summaries,
+                        and check water usage alerts in one place.
+                    </p>
+                    <a href="/dashboard">Open Dashboard →</a>
+                </div>
+
+                <div class="card">
+                    <div class="icon">🗂️</div>
+                    <h3>Usage History</h3>
+                    <p>
+                        Browse previous readings and filter records
+                        to understand your water consumption.
+                    </p>
+                    <a href="/history">View History →</a>
+                </div>
+
+                <div class="card">
+                    <div class="icon">📈</div>
+                    <h3>Water Analytics</h3>
+                    <p>
+                        Explore consumption trends and compare readings
+                        across different zones and dates.
+                    </p>
+                    <a href="/analytics">Explore Analytics →</a>
+                </div>
+            </div>
+
+            <div class="status">
+                <span>●</span> AquaSense application is running
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        © AquaSense | Smart Water Monitoring System
+        <br><br>
+        Every Drop Counts. Every Insight Matters.
+    </footer>
+</body>
+</html>
+
+

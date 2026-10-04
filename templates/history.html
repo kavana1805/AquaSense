@@ -1,0 +1,139 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Water History | AquaSense</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <h1>💧 AquaSense</h1>
+        <p>Smart Water Monitoring System</p>
+    </header>
+
+    <main class="container">
+
+        <!-- Page Introduction -->
+        <section class="zone-card"
+                 style="background: linear-gradient(120deg, #eaf5ff, #ffffff);
+                        border-left: 5px solid #1677d2;
+                        margin-bottom: 24px;">
+
+            <p style="color: #1677d2; font-weight: 700; margin-bottom: 5px;">
+                AQUASENSE RECORDS
+            </p>
+
+            <h2>Water Usage History</h2>
+
+            <p>
+                Review previous readings, monitor consumption, and filter
+                records by water zone or date.
+            </p>
+
+            <div class="navigation-links">
+                <a href="/dashboard">← Back to Dashboard</a>
+                <a href="/analytics">View Analytics →</a>
+            </div>
+        </section>
+
+        <!-- History Filters -->
+        <section class="zone-card">
+
+            <h3>🔎 Find Water Readings</h3>
+
+            <p style="color: #71839a;">
+                Select a zone or date to narrow down your records.
+            </p>
+
+            <div class="history-filters">
+
+                <div class="history-filter-field">
+                    <label for="zone-filter">Water Zone</label>
+
+                    <select id="zone-filter">
+                        <option value="">All Zones</option>
+                    </select>
+                </div>
+
+                <div class="history-filter-field">
+                    <label for="date-filter">Reading Date</label>
+
+                    <input type="date" id="date-filter">
+                </div>
+
+                <div class="history-filter-action">
+                    <button type="button"
+                            id="clear-filters"
+                            class="secondary">
+                        Clear Filters
+                    </button>
+                </div>
+
+            </div>
+
+            <p id="history-message"
+               role="status"
+               aria-live="polite">
+                Loading reading history...
+            </p>
+
+        </section>
+
+        <!-- History Table -->
+        <section class="history-section">
+
+            <div class="history-heading">
+                <div>
+                    <h2>Previous Water Readings</h2>
+                    <p>Recorded consumption across your monitored zones.</p>
+                </div>
+
+                <span class="badge">Water Records</span>
+            </div>
+
+            <div class="table-container history-table-wrapper">
+
+                <table class="history-table">
+
+                    <thead>
+                        <tr>
+                            <th>Water Zone</th>
+                            <th>Location</th>
+                            <th>Consumption</th>
+                            <th>Date and Time</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="history-body">
+                        <tr>
+                            <td colspan="4">Loading history...</td>
+                        </tr>
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+        <!-- Footer Navigation -->
+        <footer class="navigation-links">
+            <a href="/dashboard">← Dashboard</a>
+            <a href="/analytics">View Analytics →</a>
+        </footer>
+
+    </main>
+
+    <!-- Existing History JavaScript -->
+    <script src="{{ url_for('static', filename='js/history.js') }}"></script>
+
+</body>
+</html>

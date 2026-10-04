@@ -1,0 +1,186 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AquaSense - Water Analytics</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <style>
+        .analytics-filters {
+            margin: 20px 0;
+            padding: 20px;
+        }
+
+        .analytics-filters label {
+            display: block;
+            margin-top: 12px;
+            margin-bottom: 6px;
+        }
+
+        .analytics-filters input {
+            display: block;
+            width: 100%;
+            max-width: 320px;
+            padding: 10px;
+            margin-bottom: 12px;
+            box-sizing: border-box;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+
+        .analytics-cards {
+            display: grid;
+            grid-template-columns: repeat(
+                auto-fit,
+                minmax(200px, 1fr)
+            );
+            gap: 20px;
+            margin: 24px 0;
+        }
+
+        .analytics-value {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #0284c7;
+        }
+
+        .chart-card {
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            min-height: 280px;
+        }
+
+        .section-heading {
+            margin-top: 30px;
+        }
+
+        .navigation-links {
+            margin: 30px 0;
+        }
+
+        .navigation-links a {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <h1>💧 AquaSense</h1>
+        <p>Smart Water Monitoring System</p>
+    </header>
+
+    <main class="container">
+
+        <h2>Water Consumption Analytics</h2>
+        <p>Analyze water usage across your monitored zones.</p>
+
+        <!-- Date Filters -->
+        <section class="zone-card analytics-filters">
+
+            <h3>Filter Analytics by Date</h3>
+
+            <label for="start-date">Start Date</label>
+            <input type="date" id="start-date">
+
+            <label for="end-date">End Date</label>
+            <input type="date" id="end-date">
+
+            <div class="filter-buttons">
+
+                <button type="button" id="apply-analytics-filter">
+                    Apply Filters
+                </button>
+
+                <button type="button" id="clear-analytics-filter">
+                    Clear Filters
+                </button>
+
+            </div>
+
+            <p id="filter-message" role="status"></p>
+
+        </section>
+
+        <!-- Loading and Error Messages -->
+        <p id="analytics-message" role="status" aria-live="polite">
+            Loading analytics...
+        </p>
+
+        <!-- Summary Cards -->
+        <section class="analytics-cards">
+
+            <article class="zone-card">
+                <h3>Total Consumption</h3>
+                <p class="analytics-value" id="total-consumption">—</p>
+                <p>Litres recorded</p>
+            </article>
+
+            <article class="zone-card">
+                <h3>Average Consumption</h3>
+                <p class="analytics-value" id="average-consumption">—</p>
+                <p>Litres per reading</p>
+            </article>
+
+            <article class="zone-card">
+                <h3>Total Readings</h3>
+                <p class="analytics-value" id="total-readings">—</p>
+                <p>Records in the database</p>
+            </article>
+
+        </section>
+
+        <!-- Consumption Chart -->
+        <h2 class="section-heading">Consumption by Zone</h2>
+
+        <section class="zone-card chart-card">
+            <div class="chart-container">
+                <canvas
+                    id="analytics-chart"
+                    role="img"
+                    aria-label="Bar chart showing water consumption by zone">
+                </canvas>
+            </div>
+        </section>
+
+        <!-- Zone-wise Details -->
+        <h2 class="section-heading">Zone-wise Details</h2>
+
+        <section id="zone-analytics" class="dashboard"></section>
+
+        <!-- Navigation -->
+        <div class="navigation-links">
+            <a href="/dashboard">← Back to Dashboard</a>
+            <span> | </span>
+            <a href="/history">View Water History</a>
+            <span> | </span>
+            <a href="/">Home</a>
+        </div>
+
+    </main>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Analytics JavaScript -->
+    <script src="{{ url_for('static', filename='js/analytics.js') }}"></script>
+
+</body>
+</html>

@@ -1,0 +1,144 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AquaSense | Dashboard</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <!-- Top Header -->
+    <header class="header">
+        <h1>💧 AquaSense</h1>
+        <p>Smart Water Monitoring System</p>
+    </header>
+
+    <main class="container">
+
+        <!-- Welcome Banner -->
+        <section class="zone-card"
+                 style="background: linear-gradient(120deg, #eaf5ff, #ffffff);
+                        border-left: 5px solid #1677d2;
+                        margin-bottom: 24px;">
+
+            <p style="color: #1677d2; font-weight: 700; margin-bottom: 5px;">
+                AQUASENSE OVERVIEW
+            </p>
+
+            <h2>Water Usage Dashboard</h2>
+
+            <p>
+                Monitor consumption, record readings, and track water
+                alerts across your monitored zones.
+            </p>
+
+            <div class="navigation-links">
+                <a href="/analytics">📊 View Analytics</a>
+                <a href="/history">📋 Water History</a>
+            </div>
+        </section>
+
+        <!-- Dashboard Summary -->
+        <h2>Water Monitoring</h2>
+
+        <p>
+            Record new consumption readings and review the latest water data.
+        </p>
+
+        <!-- Record Consumption -->
+        <section class="zone-card form-card">
+            <h3>＋ Record Water Consumption</h3>
+
+            <form id="reading-form">
+
+                <label for="zone-id">Water Zone</label>
+
+                <select id="zone-id" required>
+                    <option value="">Select a water zone</option>
+                </select>
+
+                <label for="consumption">Consumption (litres)</label>
+
+                <input
+                    type="number"
+                    id="consumption"
+                    min="0"
+                    step="0.01"
+                    placeholder="Enter consumption in litres"
+                    required
+                >
+
+                <div style="margin-top: 18px;">
+                    <button type="submit">Save Reading →</button>
+                </div>
+
+                <p id="form-message"
+                   role="status"
+                   aria-live="polite"></p>
+
+            </form>
+        </section>
+
+        <!-- Water Alerts -->
+        <h2 class="section-heading">🔔 Water Alerts</h2>
+
+        <section class="zone-card">
+            <p style="color: #71839a; margin-top: 0;">
+                Review warnings and updates from your monitored zones.
+            </p>
+
+            <div id="alerts" class="alerts-container">
+                Loading alerts...
+            </div>
+        </section>
+
+        <!-- Water Consumption Chart -->
+        <h2 class="section-heading">📈 Water Consumption Chart</h2>
+
+        <section class="zone-card chart-card">
+            <p style="color: #71839a; margin-top: 0;">
+                Compare recorded consumption with daily limits for each zone.
+            </p>
+
+            <div class="chart-container">
+                <canvas
+                    id="usage-chart"
+                    aria-label="Water consumption compared with daily limits for each zone"
+                    role="img">
+                </canvas>
+            </div>
+        </section>
+
+        <!-- Zone Summary -->
+        <h2 class="section-heading">📍 Zone Summary</h2>
+
+        <p>
+            View the latest consumption information for each monitored zone.
+        </p>
+
+        <div id="summary" class="dashboard">
+            Loading water data...
+        </div>
+
+        <!-- Footer Navigation -->
+        <footer class="navigation-links">
+            <a href="/analytics">View Analytics →</a>
+            <a href="/history">View Water History →</a>
+        </footer>
+
+    </main>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Existing AquaSense JavaScript -->
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</body>
+</html>
